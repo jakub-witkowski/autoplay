@@ -10,8 +10,8 @@
 #define MAX_NUMBER_OF_UNITS 1002
 
 #include "load_status.h"
-//#include "menu.h"
-//#include "train.h"
+//#include "dice.h"
+#include "train.h"
 //#include "move.h"
 //#include "attack.h"
 #include "map.h"
@@ -29,14 +29,14 @@ int map_data[MAP_SIZE_Y][MAP_SIZE_X]; //target array to hold int values represen
 
 long gold = 0; // holds the amount of gold
 au active_units[MAX_NUMBER_OF_UNITS]; // holds information on player and enemy active units;
-char type; // holds the type of the unit to be trained
+//char type; // holds the type of the unit to be trained
 int units_on_the_map_counter = 0; // holds the number of units currently present on the map
 
-int dice(int max)
+/*int dice(int max)
 {
 	int value = rand() % max;
 	return value;
-}
+}*/
 
 void *timer(void *arg)
 {
@@ -84,22 +84,37 @@ int main(int argc, char* argv[])
 	/* reading status and map data from files, updating gold if workers are present at the mine */
 	map(argv[1], map_data, temp); // update map
 	//printf("Map data loaded\n");
-	display_map(map_data);
+	//display_map(map_data);
 	//printf("Map field 16|3: %d\n", map_data[3][16]);
 	
 	load_status(argv[2], &units_on_the_map_counter, &gold, active_units); // otherwise, read data from status.txt
 	//printf("Status loaded\n");
-	printf("Number of units on the map: %d\n", units_on_the_map_counter);
-	list(active_units, &units_on_the_map_counter);
+	//printf("Number of units on the map: %d\n", units_on_the_map_counter);
+	//list(active_units, &units_on_the_map_counter);
 	
 	gold += mining(map_data, active_units, &units_on_the_map_counter); // update gold
 	//printf("Gold updated\n");
-	printf("Gold: %ld\n", gold);
+	//printf("Gold: %ld\n", gold);
 
 	srand(time(NULL)); // providing core for generating random numbers
 	//printf("Dice cast: %d\n", dice(100));
 
-	save(&gold, &units_on_the_map_counter, active_units);
+	/* is the base free and is there enough gold to train a unit? */
+	if((strcmp(active_units[0].is_base_busy, "0") == 0) && (gold >= 100))
+	{
+		if ((rand() % 100) > 50)
+			train(argv[3], &gold, active_units, &units_on_the_map_counter);
+		else
+			printf("No training ordered\n");
+	}
+
+//	if(*u > 2)
+//		move();
+
+//	if(*u > 2)
+//		attack();
+
+	//save(&gold, &units_on_the_map_counter, active_units);
 	pthread_join(thread, NULL);
 
     return 0;

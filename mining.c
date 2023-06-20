@@ -36,7 +36,7 @@ int mining(int m[][MAP_SIZE_X], au a[], int* u)
 			workers_count++;
 		}
 	}
-	printf("Workers count: %d\n", workers_count);
+	//printf("Workers count: %d\n", workers_count);
 
 	/* are any of the workers stationed at a mine? */
 	if (workers_count > 0)
@@ -55,7 +55,7 @@ int mining(int m[][MAP_SIZE_X], au a[], int* u)
 		}
 	}
 
-	printf("Workers present at the mine: %d\n", workers_at_the_mine_count);
+	//printf("Workers present at the mine: %d\n", workers_at_the_mine_count);
 
 	if (workers_at_the_mine_count > 0)
 		mined_gold = workers_at_the_mine_count * gold_per_worker;
