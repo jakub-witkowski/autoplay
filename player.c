@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
 	load_status(argv[2], &units_on_the_map_counter, &gold, active_units); // otherwise, read data from status.txt
 	//printf("Status loaded\n");
 	//printf("Number of units on the map: %d\n", units_on_the_map_counter);
-	//list(active_units, &units_on_the_map_counter);
+	list(active_units, &units_on_the_map_counter);
 	
 	gold += mining(map_data, active_units, &units_on_the_map_counter); // update gold
 	//printf("Gold updated\n");
@@ -106,7 +106,7 @@ int main(int argc, char* argv[])
 
 	attack(argv[3], active_units, &units_on_the_map_counter);
 
-	//list(active_units, &units_on_the_map_counter);
+	list(active_units, &units_on_the_map_counter);
 	
 	pthread_join(thread, NULL);
 
