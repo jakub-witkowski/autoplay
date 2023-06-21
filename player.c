@@ -10,12 +10,11 @@
 #define MAX_NUMBER_OF_UNITS 1002
 
 #include "load_status.h"
-//#include "dice.h"
 #include "train.h"
-//#include "move.h"
-//#include "attack.h"
+#include "move.h"
+#include "attack.h"
 #include "map.h"
-#include "display_map.h"
+//#include "display_map.h"
 #include "list.h"
 #include "save.h"
 #include "mining.h"
@@ -29,14 +28,7 @@ int map_data[MAP_SIZE_Y][MAP_SIZE_X]; //target array to hold int values represen
 
 long gold = 0; // holds the amount of gold
 au active_units[MAX_NUMBER_OF_UNITS]; // holds information on player and enemy active units;
-//char type; // holds the type of the unit to be trained
 int units_on_the_map_counter = 0; // holds the number of units currently present on the map
-
-/*int dice(int max)
-{
-	int value = rand() % max;
-	return value;
-}*/
 
 void *timer(void *arg)
 {
@@ -102,19 +94,20 @@ int main(int argc, char* argv[])
 	/* is the base free and is there enough gold to train a unit? */
 	if((strcmp(active_units[0].is_base_busy, "0") == 0) && (gold >= 100))
 	{
-		if ((rand() % 100) > 50)
+		if ((rand() % 101) > 50)
 			train(argv[3], &gold, active_units, &units_on_the_map_counter);
 		else
-			printf("No training ordered\n");
+			printf("No training ordered.\n");
 	}
+	else
+		printf("Training in progress, cannot train new units.\n");
 
-//	if(*u > 2)
-//		move();
+	move(argv[3], active_units, &units_on_the_map_counter, map_data);
 
-//	if(*u > 2)
-//		attack();
+	attack(argv[3], active_units, &units_on_the_map_counter);
 
-	//save(&gold, &units_on_the_map_counter, active_units);
+	//list(active_units, &units_on_the_map_counter);
+	
 	pthread_join(thread, NULL);
 
     return 0;

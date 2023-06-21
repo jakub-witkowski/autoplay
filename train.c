@@ -43,7 +43,7 @@ void train(char fname[], long* g, au a[], int* u)
 
 	if (choice_made == 0 && (*g >= 100 && *g < 250))
 	{
-		value = rand() % 20;
+		value = rand() % 21;
 		if (value <=10)
 		{
 			unit_cost = 100;
@@ -66,7 +66,7 @@ void train(char fname[], long* g, au a[], int* u)
 
 	if (choice_made == 0 && (*g >= 250 && *g < 400))
 	{
-		value = rand() % 40;
+		value = rand() % 41;
 		if (value <= 10)
 		{
 			unit_cost = 100;
@@ -107,7 +107,7 @@ void train(char fname[], long* g, au a[], int* u)
 
 	if (choice_made == 0 && (*g >= 400 && *g < 500))
 	{
-		value = rand() % 50;
+		value = rand() % 51;
 		if (value <= 10)
 		{
 			unit_cost = 100;
@@ -157,7 +157,7 @@ void train(char fname[], long* g, au a[], int* u)
 
 	if (choice_made == 0 && (*g >= 500 && *g < 800))
 	{
-		value = rand() % 60;
+		value = rand() % 61;
 		if (value <= 10)
 		{
 			unit_cost = 100;
@@ -216,7 +216,7 @@ void train(char fname[], long* g, au a[], int* u)
 
 	if (choice_made == 0 && *g > 800)
 	{
-		value = rand() % 70;
+		value = rand() % 71;
 		if (value <= 10)
 		{
 			unit_cost = 100;
@@ -311,8 +311,8 @@ void train(char fname[], long* g, au a[], int* u)
 
         fclose(fptr);
 
-		printf("Started %s.\n ", phrase);
-		printf("Gold left: %ld. \n", *g);
+		printf("Started %s.\n", phrase);
+		//printf("Gold left: %ld. \n", *g);
 		strcpy(a[0].is_base_busy, t);
 	}
 	
