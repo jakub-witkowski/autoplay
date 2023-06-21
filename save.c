@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 typedef struct {
     char affiliation[2];
@@ -26,20 +27,23 @@ void save(long* g, int* u, au a[])
     int unit_in_training;
 	for (int i = 0; i < *u; i++)
     {
-        if (a[i].training_time > 0)
+        if ((strcmp(a[i].affiliation, "P") == 0) && (a[i].training_time > 0))
+        {
             unit_in_training = i;
+            //printf("Unit in training: %d", unit_in_training);
+        }
         else
-            unit_in_training = 0;
+            unit_in_training = -1;
     }
         
-    if (unit_in_training != 0)
+    if (unit_in_training > 0)
     {
         if ((fprintf(f, "%s %s %d 0 0 %d %d\n", a[unit_in_training].affiliation, a[unit_in_training].unit_type, a[unit_in_training].unit_id, a[unit_in_training].current_stamina, --a[unit_in_training].training_time) < 0))
-                fprintf(stderr, "unable to write training units\n");
+            fprintf(stderr, "unable to write training units\n");
     }
     else
     { 
-		if (fprintf(f, "0 0 0 0 0 0 0\n") < 0)
+		if (fprintf(f, "0 0 0 0 0 0\n") < 0)
             fprintf(stderr, "unable to write training units\n");
     }
     
@@ -49,7 +53,7 @@ void save(long* g, int* u, au a[])
         fprintf(stderr, "unable to write bank status\n");
     }
 
-    /* Save the base condition */
+    /* Save the base condition
     for (int i = 0; i < 2; i++)
     {
         if (fprintf(f, "%s %s %d %d %d %d %s\n", a[i].affiliation, a[i].unit_type, a[i].unit_id, a[i].x_coord, a[i].y_coord, a[i].current_stamina, a[i].is_base_busy) < 0)
@@ -58,7 +62,7 @@ void save(long* g, int* u, au a[])
         }
     }
     
-    /* Save active units */
+    Save active units
     if (*u == 0)
     {
         fclose(f);
@@ -82,7 +86,7 @@ void save(long* g, int* u, au a[])
                 fprintf(stderr, "unable to write active units\n");
             }    
         }
-    }
+    } */
 
     fclose(f);
 }
