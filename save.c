@@ -30,7 +30,6 @@ void save(long* g, int* u, au a[])
         if ((strcmp(a[i].affiliation, "P") == 0) && (a[i].training_time > 0))
         {
             unit_in_training = i;
-            //printf("Unit in training: %d", unit_in_training);
         }
         else
             unit_in_training = -1;
@@ -52,41 +51,6 @@ void save(long* g, int* u, au a[])
     {
         fprintf(stderr, "unable to write bank status\n");
     }
-
-    /* Save the base condition
-    for (int i = 0; i < 2; i++)
-    {
-        if (fprintf(f, "%s %s %d %d %d %d %s\n", a[i].affiliation, a[i].unit_type, a[i].unit_id, a[i].x_coord, a[i].y_coord, a[i].current_stamina, a[i].is_base_busy) < 0)
-        {
-            fprintf(stderr, "unable to write base condition\n");
-        }
-    }
-    
-    Save active units
-    if (*u == 0)
-    {
-        fclose(f);
-    }
-    else if (unit_in_training != 0)
-    {
-        for (int i = 2; i < *u - 1; i++)
-        {
-            if (fprintf(f, "%s %s %d %d %d %d\n", a[i].affiliation, a[i].unit_type, a[i].unit_id, a[i].x_coord, a[i].y_coord, a[i].current_stamina) < 0)
-            {
-                fprintf(stderr, "unable to write active units\n");
-            }    
-        }
-    }
-    else if (*u > 0)
-    {
-        for (int i = 2; i < *u; i++)
-        {
-            if (fprintf(f, "%s %s %d %d %d %d\n", a[i].affiliation, a[i].unit_type, a[i].unit_id, a[i].x_coord, a[i].y_coord, a[i].current_stamina) < 0)
-            {
-                fprintf(stderr, "unable to write active units\n");
-            }    
-        }
-    } */
 
     fclose(f);
 }

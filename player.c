@@ -14,8 +14,6 @@
 #include "move.h"
 #include "attack.h"
 #include "map.h"
-//#include "display_map.h"
-#include "list.h"
 #include "save.h"
 #include "mining.h"
 
@@ -75,21 +73,12 @@ int main(int argc, char* argv[])
 
 	/* reading status and map data from files, updating gold if workers are present at the mine */
 	map(argv[1], map_data, temp); // update map
-	//printf("Map data loaded\n");
-	//display_map(map_data);
-	//printf("Map field 16|3: %d\n", map_data[3][16]);
 	
-	load_status(argv[2], &units_on_the_map_counter, &gold, active_units); // otherwise, read data from status.txt
-	//printf("Status loaded\n");
-	//printf("Number of units on the map: %d\n", units_on_the_map_counter);
-	list(active_units, &units_on_the_map_counter);
+	load_status(argv[2], &units_on_the_map_counter, &gold, active_units); // read data from status.txt
 	
 	gold += mining(map_data, active_units, &units_on_the_map_counter); // update gold
-	//printf("Gold updated\n");
-	//printf("Gold: %ld\n", gold);
 
 	srand(time(NULL)); // providing core for generating random numbers
-	//printf("Dice cast: %d\n", dice(100));
 
 	/* is the base free and is there enough gold to train a unit? */
 	if((strcmp(active_units[0].is_base_busy, "0") == 0) && (gold >= 100))
@@ -105,8 +94,6 @@ int main(int argc, char* argv[])
 	move(argv[3], active_units, &units_on_the_map_counter, map_data);
 
 	attack(argv[3], active_units, &units_on_the_map_counter);
-
-	list(active_units, &units_on_the_map_counter);
 	
 	pthread_join(thread, NULL);
 

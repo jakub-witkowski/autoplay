@@ -312,7 +312,6 @@ void train(char fname[], long* g, au a[], int* u)
         fclose(fptr);
 
 		printf("Started %s.\n", phrase);
-		//printf("Gold left: %ld. \n", *g);
 		strcpy(a[0].is_base_busy, t);
 	}
 	

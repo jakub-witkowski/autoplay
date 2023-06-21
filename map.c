@@ -17,7 +17,7 @@ void map(char fname[], int m[][MAP_SIZE_X], int t[][MAP_SIZE_X+1])
     for (int i = 0; i < MAP_SIZE_Y; i++)
         for (int j = 0; j < MAP_SIZE_X+1; j++)
         {
-            t[i][j] = atoi(&map_field); // - '0'; //char symbol value to int conversion by subtracting 38 (ASCII code for '0')
+            t[i][j] = atoi(&map_field); 
             map_field = fgetc(fptr);
         }
 

@@ -85,7 +85,6 @@ void attack(char fname[], au a[], int* u)
                             targets_within_range++;
                             attacker_id = a[i].unit_id;
                             target_id = a[j].unit_id;
-                            //a[i].remaining_movement = remaining_movement - distance;
                             a[i].attack_count = 0;
                             a[i].remaining_movement = 0;
                             printf("Ordering unit %d to attack enemy unit %d. \n", attacker_id, target_id);
